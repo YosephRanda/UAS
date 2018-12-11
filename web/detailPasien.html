@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Pendaftaran Rumah Sakit anak bangsa</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- css -->
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <!-- skin color -->
+        <link href="color/default.css" rel="stylesheet">
+        <!--[if lt IE 7]>
+    <link href="css/font-awesome-ie7.css" type="text/css" rel="stylesheet">
+  <![endif]-->
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico">
+
+        <!-- =======================================================
+                Theme Name: Maxim
+                Theme URL: https://bootstrapmade.com/maxim-free-onepage-bootstrap-theme/
+                Author: BootstrapMade.com
+                Author URL: https://bootstrapmade.com
+        ======================================================= -->
+
+    </head>
+
+    <body>
+        <!-- navbar -->
+        <div class="navbar-wrapper">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <!-- Responsive navbar -->
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                        </a>
+                        <h1 class="brand"><a href="daftar antrian.html">RS Anak Bangsa</a></h1>
+                        <!-- navigation -->
+                        <nav class="pull-right nav-collapse collapse">
+                            <ul id="menu-main" class="nav">
+
+                                <li><a title="home" href="soal1.html">Home</a></li>
+                                <li><a title="Dokter" href="ujicoba.html">Lanjut</a></li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <style>
+                       table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 40%;
+              
+                
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 10px;
+                position: relative;
+                right:-400px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+      </style>
+        <!-- spacer section -->
+        <section class="spacer green">
+            <div class="container">
+                <div class="row">
+                    <div class="span12 aligncenter flyUp">
+                        <h2 class="pagetitle"><b>CARI PASIEN </b></h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+           <br>
+  <div id="demo">
+    <main class="my-form">
+     <div class="cotainer">
+       <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">Search</div>
+            <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">No Rekam Medis</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="noRm" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">Nama</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="nama" readonly>
+              </div>
+            </div>   
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">Alamat</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="alamat" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">Tanggal Lahir</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="tanggalLahir" readonly>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">Kelamin</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="kelamin" readonly>
+              </div>
+            </div> 
+          </div>
+        </div>
+
+      </div>
+      <p id="output"></p>
+    </div>
+
+  </div>
+</main>
+</div>
+      <script>
+            function loadDoc() {
+                var url = "http://206.189.38.188:8080/myrs/webresources/pasien/cariPasien?nik=" + getCookie("username");
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, true);
+                xhttp.send();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                         document.getElementById("output").innerHTML = this.responseText;
+                        var myObj = JSON.parse(this.responseText);
+                        document.getElementById("noRm").value = myObj.noRm;
+                        document.getElementById("nama").value = myObj.nama;
+                        document.getElementById("alamat").value = myObj.alamat;
+                        document.getElementById("tanggalLahir").value = myObj.tanggalLahir;
+                        document.getElementById("kelamin").value = myObj.kelamin;
+                    }
+                };   
+            }
+            function getCookie(cname) {
+                            var name = cname + "=";
+                            var decodedCookie = decodeURIComponent(document.cookie);
+                            var ca = decodedCookie.split(';');
+                            for (var i = 0; i < ca.length; i++) {
+                                var c = ca[i];
+                                while (c.charAt(0) == ' ') {
+                                    c = c.substring(1);
+                                }
+                                if (c.indexOf(name) == 0) {
+                                    return c.substring(name.length, c.length);
+                                }
+                            }
+                            return "";
+                        }
+                        function checkCookie() {
+                            var username = getCookie("username");
+                            if (username != "") {
+                                document.getElementById("jadwal").value = username;
+                            }
+                        }
+        </script>
+
+       
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="span6 offset3">
+                        <ul class="social-networks">
+                            <li><a href="#"><i class="icon-circled icon-bgdark icon-instagram icon-2x"></i></a></li>
+                            <li><a href="#"><i class="icon-circled icon-bgdark icon-twitter icon-2x"></i></a></li>
+                            <li><a href="#"><i class="icon-circled icon-bgdark icon-dribbble icon-2x"></i></a></li>
+                            <li><a href="#"><i class="icon-circled icon-bgdark icon-pinterest icon-2x"></i></a></li>
+                        </ul>
+                        <p class="copyright">
+                            &copy; Maxim Theme. All rights reserved.
+                        <div class="credits">
+                            <!--
+All the links in the footer should remain intact.
+You can delete the links only if you purchased the pro version.
+Licensing information: https://bootstrapmade.com/license/
+Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Maxim
+                            -->
+                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- ./container -->
+        </footer>
+        <a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bgdark icon-2x"></i></a>
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+        <!-- nav -->
+        <script src="js/jquery.scrollTo.js"></script>
+        <script src="js/jquery.nav.js"></script>
+        <!-- localScroll -->
+        <script src="js/jquery.localScroll.js"></script>
+        <!-- bootstrap -->
+        <script src="js/bootstrap.js"></script>
+        <!-- prettyPhoto -->
+        <script src="js/jquery.prettyPhoto.js"></script>
+        <!-- Works scripts -->
+        <script src="js/isotope.js"></script>
+        <!-- flexslider -->
+        <script src="js/jquery.flexslider.js"></script>
+        <!-- inview -->
+        <script src="js/inview.js"></script>
+        <!-- animation -->
+        <script src="js/animate.js"></script>
+        <!-- twitter -->
+        <script src="js/jquery.tweet.js"></script>
+        <!-- custom functions -->
+        <script src="js/custom.js"></script>
+    </body>
+
+</html>
