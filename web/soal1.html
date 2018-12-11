@@ -94,55 +94,70 @@ and open the template in the editor.
             </div>
         </section>
         <section>
-            <div class="form-group row">
-                
-                <div class="col-md-6">
-                   
-                    <center>   <label>NAMA</label></center>
-                      <br>
-                      <center>  <input type="text" class="form-control" id="nik"  placeholder="Masukan nama" ></center>
-                </div>
-                <center><button type="button" onclick="loadDoc()" id="btn">Cari</button><br><br></center>
+           <br>
+        <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right">NIK</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="nik" >
             </div>
+            <center><button type="button" onclick="loadDoc()" id="btn">Cari</button><br><br></center>
+        </div>
 
 
-            <div id="id01"></div>
-            <script>
-                function loadDoc() {
-                    var xmlhttp = new XMLHttpRequest();
+        <div id="id01"></div>
+        <script>
+            function loadDoc() {
+                var xmlhttp = new XMLHttpRequest();
 
 
-                    var url = "http://206.189.38.188:8080/myrs/webresources/pasien/cariNamaPasien?nama=" + nik.value;
+                var url = "http://206.189.38.188:8080/myrs/webresources/pasien/cariNamaPasien?nama=" + nik.value;
 
-                    xmlhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            myFunction(this.responseText);
-                        }
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        myFunction(this.responseText);
                     }
-                    xmlhttp.open("GET", url, true);
-                    xmlhttp.send();
+                }
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
 
-                    function myFunction(response) {
-                        var arr = JSON.parse(response);
-                        var i;
-                        var out = "<table><tr><th>NIK</th><th>NAMA</th><th>TANGGAL LAHIR</th><th>DETAIL</th></tr>";
+                function myFunction(response) {
+                    var arr = JSON.parse(response);
+                    var i;
+                    var out = "<table><tr><th>NIK</th><th>NAMA</th><th>TANGGAL LAHIR</th><th>DETAIL</th></tr>";
+                    var detail = "detail";
 
-                        for (i = 0; i < arr.length; i++) {
-                            out += "<tr><td>" +
-                                    arr[i].noRm +
-                                    "</td><td>" +
-                                    arr[i].nama +
-                                    "</td><td>" +
-                                    arr[i].tanggalLahir +
-                                    "</td><td>" +
-                                    "detail";
+                    for (i = 0; i < arr.length; i++) {
+                        out += "<tr><td>" +
+                                arr[i].noRm +
+                                "</td><td>" +
+                                arr[i].nama +
+                                "</td><td>" +
+                                arr[i].tanggalLahir +
+                                "</td><td><button type=\"submit\" onclick=\"myFunction1('" + arr[i].nik + "')\">Pesan</button></td></tr>";
 
-                        }
-                        out += "</table>";
-                        document.getElementById("id01").innerHTML = out;
-                    }}
-            </script>
-
+                    }
+                    out += "</table>";
+                    document.getElementById("id01").innerHTML = out;
+                }
+            }
+            function myFunction1(nik) {
+                var myWindow = window.open("detailPasien.html");
+                setCookie("username", nik, 1);
+            }
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+        </script>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         </section>
 
         <footer>
